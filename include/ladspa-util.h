@@ -60,7 +60,7 @@ long int lrintf (float x);
 // Denormalise floats, only actually needed for PIII and recent PowerPC
 //#define FLUSH_TO_ZERO(fv) (((*(unsigned int*)&(fv))&0x7f800000)==0)?0.0f:(fv)
 
-static inline float flush_to_zero(float f)
+static __inline float flush_to_zero(float f)
 {
 	ls_pcast32 v;
 
@@ -71,7 +71,7 @@ static inline float flush_to_zero(float f)
 	return (v.i & 0x7f800000) < 0x08000000 ? 0.0f : f;
 }
 
-static inline void round_to_zero(volatile float *f)
+static __inline void round_to_zero(volatile float *f)
 {
 	*f += 1e-18;
 	*f -= 1e-18;
@@ -79,7 +79,7 @@ static inline void round_to_zero(volatile float *f)
 
 /* A set of branchless clipping operations from Laurent de Soras */
 
-static inline float f_max(float x, float a)
+static __inline float f_max(float x, float a)
 {
 	x -= a;
 	x += fabs(x);
@@ -89,7 +89,7 @@ static inline float f_max(float x, float a)
 	return x;
 }
 
-static inline float f_min(float x, float b)
+static __inline float f_min(float x, float b)
 {
 	x = b - x;
 	x += fabs(x);
@@ -99,7 +99,7 @@ static inline float f_min(float x, float b)
 	return x;
 }
 
-static inline float f_clamp(float x, float a, float b)
+static __inline float f_clamp(float x, float a, float b)
 {
 	const float x1 = fabs(x - a);
 	const float x2 = fabs(x - b);
@@ -130,7 +130,7 @@ static inline float f_clamp(float x, float a, float b)
 #define LIN_INTERP(f,a,b) ((a) + (f) * ((b) - (a)))
 
 // Cubic interpolation function
-static inline float cube_interp(const float fr, const float inm1, const float
+static __inline float cube_interp(const float fr, const float inm1, const float
                                 in, const float inp1, const float inp2)
 {
 	return in + 0.5f * fr * (inp1 - inm1 +
@@ -140,7 +140,7 @@ static inline float cube_interp(const float fr, const float inm1, const float
 
 /* fast sin^2 aproxiamtion, adapted from jan AT rpgfan's posting to the
  * music-dsp list */
-static inline float f_sin_sq(float angle)
+static __inline float f_sin_sq(float angle)
 {
 	const float asqr = angle * angle;
 	float result = -2.39e-08f;
@@ -167,7 +167,7 @@ static inline float f_sin_sq(float angle)
 #else
 
 // Round float to int using IEEE int* hack
-static inline int f_round(float f)
+static __inline int f_round(float f)
 {
 	ls_pcast32 p;
 
@@ -180,7 +180,7 @@ static inline int f_round(float f)
 #endif
 
 // Truncate float to int
-static inline int f_trunc(float f)
+static __inline int f_trunc(float f)
 {
 	return f_round(floorf(f));
 }
@@ -190,7 +190,7 @@ static inline int f_trunc(float f)
 #if 0
 
 /* original */
-static inline float f_pow2(float x)
+static __inline float f_pow2(float x)
 {
 	long *px = (long*)(&x); // store address of float as long pointer
 	const float tx = (x-0.5f) + (3<<22); // temporary value for truncation
@@ -208,7 +208,7 @@ static inline float f_pow2(float x)
 #else
 
 /* union version */
-static inline float f_pow2(float x)
+static __inline float f_pow2(float x)
 {
 	ls_pcast32 *px, tx, lx;
 	float dx;
