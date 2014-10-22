@@ -27,7 +27,7 @@
 #include <string.h>
 #include "gverbdsp.h"
 #include "gverb.h"
-#include "../include/ladspa-util.h"
+#include "ladspa-util.h"
 
 #define FDNORDER 4
 

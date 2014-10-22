@@ -2,7 +2,7 @@
 #ifndef GVERBDSP_H
 #define GVERBDSP_H
 
-#include "../include/ladspa-util.h"
+#include "ladspa-util.h"
 
 typedef struct {
   int size;
