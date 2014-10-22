@@ -42,7 +42,7 @@ void fixeddelay_flush(ty_fixeddelay *);
 int isprime(int);
 int nearest_prime(int, float);
 
-static inline float diffuser_do(ty_diffuser *p, float x)
+static __inline float diffuser_do(ty_diffuser *p, float x)
 {
   float y,w;
 
@@ -54,7 +54,7 @@ static inline float diffuser_do(ty_diffuser *p, float x)
   return(y);
 }
 
-static inline float fixeddelay_read(ty_fixeddelay *p, int n)
+static __inline float fixeddelay_read(ty_fixeddelay *p, int n)
 {
   int i;
 
@@ -62,18 +62,18 @@ static inline float fixeddelay_read(ty_fixeddelay *p, int n)
   return(p->buf[i]);
 }
 
-static inline void fixeddelay_write(ty_fixeddelay *p, float x)
+static __inline void fixeddelay_write(ty_fixeddelay *p, float x)
 {
   p->buf[p->idx] = x;
   p->idx = (p->idx + 1) % p->size;
 }
 
-static inline void damper_set(ty_damper *p, float damping)
+static __inline void damper_set(ty_damper *p, float damping)
 { 
   p->damping = damping;
 } 
   
-static inline float damper_do(ty_damper *p, float x)
+static __inline float damper_do(ty_damper *p, float x)
 { 
   float y;
     

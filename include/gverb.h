@@ -93,7 +93,7 @@ static void gverb_set_taillevel(ty_gverb *, float);
  * be 0.5, say.
  */
 
-static inline void gverb_fdnmatrix(float *a, float *b)
+static __inline void gverb_fdnmatrix(float *a, float *b)
 {
   const float dl0 = a[0], dl1 = a[1], dl2 = a[2], dl3 = a[3];
 
@@ -103,7 +103,7 @@ static inline void gverb_fdnmatrix(float *a, float *b)
   b[3] = 0.5f*(+dl0 + dl1 + dl2 + dl3);
 }
 
-static inline void gverb_do(ty_gverb *p, float x, float *yl, float *yr)
+static __inline void gverb_do(ty_gverb *p, float x, float *yl, float *yr)
 {
   float z;
   unsigned int i;
@@ -155,7 +155,7 @@ static inline void gverb_do(ty_gverb *p, float x, float *yl, float *yr)
   *yr = rsum;
 }
 
-static inline void gverb_set_roomsize(ty_gverb *p, const float a)
+static __inline void gverb_set_roomsize(ty_gverb *p, const float a)
 {
   unsigned int i;
 
@@ -185,7 +185,7 @@ static inline void gverb_set_roomsize(ty_gverb *p, const float a)
 
 }
 
-static inline void gverb_set_revtime(ty_gverb *p,float a)
+static __inline void gverb_set_revtime(ty_gverb *p,float a)
 {
   float ga,gt;
   double n;
@@ -205,7 +205,7 @@ static inline void gverb_set_revtime(ty_gverb *p,float a)
 
 }
 
-static inline void gverb_set_damping(ty_gverb *p,float a)
+static __inline void gverb_set_damping(ty_gverb *p,float a)
 {
   unsigned int i;
 
@@ -215,18 +215,18 @@ static inline void gverb_set_damping(ty_gverb *p,float a)
   }
 }
 
-static inline void gverb_set_inputbandwidth(ty_gverb *p,float a)
+static __inline void gverb_set_inputbandwidth(ty_gverb *p,float a)
 {
   p->inputbandwidth = a;
   damper_set(p->inputdamper,1.0 - p->inputbandwidth);
 }
 
-static inline void gverb_set_earlylevel(ty_gverb *p,float a)
+static __inline void gverb_set_earlylevel(ty_gverb *p,float a)
 {
   p->earlylevel = a;
 }
 
-static inline void gverb_set_taillevel(ty_gverb *p,float a)
+static __inline void gverb_set_taillevel(ty_gverb *p,float a)
 {
   p->taillevel = a;
 }
