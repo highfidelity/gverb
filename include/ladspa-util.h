@@ -55,7 +55,7 @@ long int lrintf (float x);
 
 /* detet floating point denormal numbers by comparing them to the smallest
  * normal, crap, but reliable */
-#define DN_CHECK(x, l) if (fabs(x) < 1e-38) printf("DN: "l"\n")
+#define DN_CHECK(x, l) if (fabs(x) < 1e-38) printf("DN: " l"\n")
 
 // Denormalise floats, only actually needed for PIII and recent PowerPC
 //#define FLUSH_TO_ZERO(fv) (((*(unsigned int*)&(fv))&0x7f800000)==0)?0.0f:(fv)
